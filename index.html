@@ -1,30 +1,322 @@
 <!DOCTYPE html>
-<html>
-  <head><title>My Portfolio</title></head>
-  <body>
-    <h1>Welcome to My Portfolio!</h1>
-    <p>My name is Ian Jack, and I am currently a student at Purdue University in electrical engineering. I have concentrations in Fields and Optics as well as Quantum Technology. 
-      I am interested in doing product research, development, and design in the future, especially in the fields of signal processing, quantum computing, and optical engineering.</p>
-  <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-    <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-  </div>
-  
-  <!-- Tab content -->
-  <div id="London" class="tabcontent">
-    <h3>London</h3>
-    <p>London is the capital city of England.</p>
-  </div>
-  
-  <div id="Paris" class="tabcontent">
-    <h3>Paris</h3>
-    <p>Paris is the capital of France.</p>
-  </div>
-  
-  <div id="Tokyo" class="tabcontent">
-    <h3>Tokyo</h3>
-    <p>Tokyo is the capital of Japan.</p>
-  </div>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Interactive CV</title>
+    <style>
+        /* ===== CSS VARIABLES - Customize colors and spacing here ===== */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --tab-spacing: 1rem;
+            --content-padding: 2rem;
+        }
+
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== TABS NAVIGATION ===== */
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--tab-spacing);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* ===== TAB CONTENT ===== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+            background: var(--surface);
+            padding: var(--content-padding);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== CONTENT STYLING ===== */
+        .tab-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .tab-content h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tab-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .tab-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background: var(--background);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tabs-nav {
+                justify-content: center;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Name</h1>
+            <p class="subtitle">Software Developer | Researcher | Problem Solver</p>
+        </header>
+
+        <nav class="tabs-nav">
+            <button class="tab-button active" data-tab="about">About</button>
+            <button class="tab-button" data-tab="education">Education & Classes</button>
+            <button class="tab-button" data-tab="research">Lab Work & Publications</button>
+            <button class="tab-button" data-tab="projects">Personal Projects</button>
+            <button class="tab-button" data-tab="skills">Skills</button>
+            <button class="tab-button" data-tab="contact">Contact</button>
+        </nav>
+
+        <main>
+            <div id="about" class="tab-content active">
+                <h2>About Me</h2>
+                <p>Welcome to my interactive portfolio! Replace this text with your personal introduction and professional summary.</p>
+                <p>Highlight your passion, your background, and what drives you in your field.</p>
+            </div>
+
+            <div id="education" class="tab-content">
+                <h2>Education & Classes</h2>
+                
+                <div class="card">
+                    <h4>University Name - Degree</h4>
+                    <p><strong>Expected Graduation:</strong> Month Year</p>
+                    <p><strong>GPA:</strong> X.XX/4.0</p>
+                </div>
+
+                <h3>Relevant Coursework</h3>
+                <ul>
+                    <li>Course Name 1 - Brief description or key topics</li>
+                    <li>Course Name 2 - Brief description or key topics</li>
+                    <li>Course Name 3 - Brief description or key topics</li>
+                </ul>
+            </div>
+
+            <div id="research" class="tab-content">
+                <h2>Lab Work & Publications</h2>
+                
+                <div class="card">
+                    <h4>Research Project Title</h4>
+                    <p><strong>Lab/Institution:</strong> Lab Name</p>
+                    <p><strong>Duration:</strong> Month Year - Month Year</p>
+                    <p>Brief description of your research work, methodologies used, and key findings.</p>
+                </div>
+
+                <h3>Publications</h3>
+                <div class="card">
+                    <h4>Paper Title</h4>
+                    <p><strong>Authors:</strong> Your Name, Co-Author Names</p>
+                    <p><strong>Published in:</strong> Conference/Journal Name, Year</p>
+                    <p>Brief abstract or description of the publication.</p>
+                </div>
+            </div>
+
+            <div id="projects" class="tab-content">
+                <h2>Personal Projects</h2>
+                
+                <div class="card">
+                    <h4>Project Name</h4>
+                    <p><strong>Technologies:</strong> List technologies used</p>
+                    <p>Description of the project, what problem it solves, and what you learned.</p>
+                    <p><strong>GitHub:</strong> <a href="#">Link to repository</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>Another Project</h4>
+                    <p><strong>Technologies:</strong> List technologies used</p>
+                    <p>Description of the project, what problem it solves, and what you learned.</p>
+                    <p><strong>Live Demo:</strong> <a href="#">Link to demo</a></p>
+                </div>
+            </div>
+
+            <div id="skills" class="tab-content">
+                <h2>Skills & Technologies</h2>
+                
+                <h3>Programming Languages</h3>
+                <p>Python, JavaScript, Java, C++, etc.</p>
+
+                <h3>Frameworks & Libraries</h3>
+                <p>React, Node.js, TensorFlow, etc.</p>
+
+                <h3>Tools & Platforms</h3>
+                <p>Git, Docker, AWS, etc.</p>
+
+                <h3>Other Skills</h3>
+                <p>Data Analysis, Machine Learning, Web Development, etc.</p>
+            </div>
+
+            <div id="contact" class="tab-content">
+                <h2>Get in Touch</h2>
+                <p>I'm always interested in new opportunities and collaborations.</p>
+                
+                <div class="card">
+                    <p><strong>Email:</strong> your.email@example.com</p>
+                    <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/yourprofile</a></p>
+                    <p><strong>GitHub:</strong> <a href="#">github.com/yourusername</a></p>
+                    <p><strong>Location:</strong> City, State/Country</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+    </script>
+</body>
 </html>
