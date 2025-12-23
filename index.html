@@ -156,6 +156,47 @@
         .card h4 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+
+            /* ===== COURSE LIST STYLING ===== */
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.course-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.course-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.course-code {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 80px;
+    font-family: 'Courier New', monospace;
+}
+
+.course-name {
+    color: var(--text-primary);
+    text-decoration: none;
+    flex: 1;
+}
+
+.course-name:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
         }
 
         /* ===== FOOTER ===== */
@@ -191,8 +232,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Your Name</h1>
-            <p class="subtitle">Software Developer | Researcher | Problem Solver</p>
+            <h1>Ian Jack</h1>
+            <p class="subtitle">Electrical Engineering | Quantum Optics</p>
         </header>
 
         <nav class="tabs-nav">
@@ -207,26 +248,38 @@
         <main>
             <div id="about" class="tab-content active">
                 <h2>About Me</h2>
-                <p>Welcome to my interactive portfolio! Replace this text with your personal introduction and professional summary.</p>
-                <p>Highlight your passion, your background, and what drives you in your field.</p>
+                <p>Welcome to my interactive portfolio! I am a student at Purdue University studying electrical engineering. My concentrations are in quantum technology and 
+                fields and optics. Using these concentrations, I work in the Quantum Optics Laboratory at Purdue University through the Purdue Quantum Science and Engineering Institute.</p>
+                <p>I am passionate about continuing to make advances in this field. As I work toward my PhD in electrical engineering, I look forward to making an impact in 
+                quantum technology through industry research.</p>
             </div>
 
             <div id="education" class="tab-content">
-                <h2>Education & Classes</h2>
-                
-                <div class="card">
-                    <h4>University Name - Degree</h4>
-                    <p><strong>Expected Graduation:</strong> Month Year</p>
-                    <p><strong>GPA:</strong> X.XX/4.0</p>
-                </div>
+    <h2>Education & Classes</h2>
+    
+    <div class="card">
+        <h4>Purdue University - Degree</h4>
+        <p><strong>Expected Graduation:</strong> Month Year</p>
+        <p><strong>GPA:</strong> X.XX/4.0</p>
+    </div>
 
-                <h3>Relevant Coursework</h3>
-                <ul>
-                    <li>Course Name 1 - Brief description or key topics</li>
-                    <li>Course Name 2 - Brief description or key topics</li>
-                    <li>Course Name 3 - Brief description or key topics</li>
-                </ul>
-            </div>
+    <h3>Coursework</h3>
+    <div class="course-list">
+        <div class="course-item">
+            <span class="course-code">CS 18000</span>
+            <a href="https://www.cs.purdue.edu/academic-programs/courses/canonical/cs180.html" target="_blank" class="course-name">Problem Solving and Object-Oriented Programming</a>
+        </div>
+        <div class="course-item">
+            <span class="course-code">CS 25100</span>
+            <a href="https://www.cs.purdue.edu/academic-programs/courses/canonical/cs251.html" target="_blank" class="course-name">Data Structures and Algorithms</a>
+        </div>
+        <div class="course-item">
+            <span class="course-code">CS 25200</span>
+            <a href="https://www.cs.purdue.edu/academic-programs/courses/canonical/cs252.html" target="_blank" class="course-name">Systems Programming</a>
+        </div>
+        <!-- Add more courses here following the same pattern -->
+    </div>
+</div>
 
             <div id="research" class="tab-content">
                 <h2>Lab Work & Publications</h2>
